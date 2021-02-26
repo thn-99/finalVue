@@ -76,28 +76,33 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, maxLength, email,numeric,alphaNum } from "vuelidate/lib/validators";
+import {
+  required,
+  maxLength,
+  email,
+  numeric,
+  alphaNum
+} from "vuelidate/lib/validators";
 
 export default {
   mixins: [validationMixin],
 
   validations: {
-    nif: { required, maxLength: maxLength(10),alphaNum },
+    nif: { required, maxLength: maxLength(10), alphaNum },
     razonSocial: { required, maxLength: maxLength(90) },
     direction: { required, maxLength: maxLength(90) },
-    postalCode: {required,numeric},
-    province: {required},
+    postalCode: { required, numeric },
+    province: { required },
     email: { required, email },
-    phoneNumber:{required,numeric},
+    phoneNumber: { required, numeric }
   },
 
   data: () => ({
     nif: "",
     email: "",
-    razonSocial: '',
-    direction: '',
-    postalCode:'',
-    
+    razonSocial: "",
+    direction: "",
+    postalCode: ""
   }),
 
   computed: {

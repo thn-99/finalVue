@@ -1,9 +1,11 @@
 <template>
   <v-app>
     <v-app-bar app color="blue-grey darken-3" light>
-        <router-link to="/"><v-btn plain   color="primary">{{pageTitle}}</v-btn></router-link>
-        <v-btn to="/about" plain color="accent">About</v-btn>
-        <v-btn to="/Client" plain color="accent">Cliente</v-btn>
+      <router-link to="/"
+        ><v-btn plain color="primary">{{ pageTitle }}</v-btn></router-link
+      >
+      <v-btn to="/about" plain color="accent">About</v-btn>
+      <v-btn to="/Client" plain color="accent">Cliente</v-btn>
     </v-app-bar>
 
     <v-main>
@@ -13,17 +15,14 @@
 </template>
 
 <script>
-
 export default {
   name: "App",
 
-  components: {
-    
-  },
+  components: {},
 
   data: () => ({
     //
-    pageTitle:"NavBarSl",
+    pageTitle: "NavBarSl"
   })
 };
 </script>
