@@ -6,6 +6,8 @@
       >
       <v-btn to="/about" plain color="accent">About</v-btn>
       <v-btn to="/Client" plain color="accent">Cliente</v-btn>
+      <v-btn to="/pruebas" plain color="accent">Cliente</v-btn>
+
     </v-app-bar>
 
     <v-main>

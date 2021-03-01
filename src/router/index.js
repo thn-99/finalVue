@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import AddClientForm from "../components/AddClientForm.vue";
 import ClientsTable from "../components/ClientsTable.vue";
+import CheckAx from "../components/CheckAx.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -25,7 +26,13 @@ const routes = [
     path: "/Client",
     name: "AddClient",
     component: AddClientForm
+  },
+  {
+    path: "/pruebas",
+    name: "Pruebas",
+    component: CheckAx
   }
+  
 ];
 
 const router = new VueRouter({
