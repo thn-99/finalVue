@@ -11,7 +11,7 @@
         hide-details
       ></v-text-field>
     </v-card-title>
-    <v-data-table :headers="headers" :items="desserts" :search="search">
+    <v-data-table :headers="headers" :items="clientes" :search="search">
       <template v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title>My CRUD</v-toolbar-title>
@@ -33,34 +33,53 @@
                   <v-row>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.name"
-                        label="Dessert name"
+                        v-model="editedItem.NIF"
+                        label="NIF"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.calories"
-                        label="Calories"
+                        v-model="editedItem.telefono"
+                        label="Teléfono"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.fat"
-                        label="Fat (g)"
+                        v-model="editedItem.correo"
+                        label="Correo"
                       ></v-text-field>
                     </v-col>
+
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.carbs"
-                        label="Carbs (g)"
+                        v-model="editedItem.direccion"
+                        label="direccion"
                       ></v-text-field>
                     </v-col>
+
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.protein"
-                        label="Protein (g)"
+                        v-model="editedItem.codigoPostal"
+                        label="Código Postal"
                       ></v-text-field>
                     </v-col>
+
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field
+                        v-model="editedItem.provincia"
+                        label="provincia"
+                      ></v-text-field>
+                    </v-col>
+
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field
+                        v-model="editedItem.poblacion"
+                        label="poblacion"
+                      ></v-text-field>
+                    </v-col>
+                    
+
+
                   </v-row>
                 </v-container>
               </v-card-text>
@@ -125,32 +144,24 @@ export default {
     dialogDelete: false,
     headers: [
       {
-        text: "Dessert (100g serving)",
+        text: "NIF",
         align: "start",
         sortable: false,
-        value: "name"
+        value: "NIF"
       },
-      { text: "Calories", value: "calories" },
-      { text: "Fat (g)", value: "fat" },
-      { text: "Carbs (g)", value: "carbs" },
-      { text: "Protein (g)", value: "protein" },
+      { text: "Teléfono", value: "telefono" },
+      //{ text: "Fat (g)", value: "codigopostal" },
+      { text: "Correo", value: "correo" },
+      //{ text: "Protein (g)", value: "protein" },
       { text: "Actions", value: "actions", sortable: false }
     ],
-    desserts: [],
+    clientes: [],
     editedIndex: -1,
     editedItem: {
-      name: "",
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0
+
     },
     defaultItem: {
-      name: "",
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0
+
     }
   }),
 
@@ -170,12 +181,17 @@ export default {
   },
 
   created() {
-    this.initialize();
+    //this.initialize();
+    this.$store.commit("recargar");
+    this.clientes=this.$store.state.clientes;
+    console.log(this.$store.state.clientes);
+
+    
   },
 
   methods: {
     initialize() {
-      this.desserts = [
+      this.clientes = [
         {
           name: "Frozen Yogurt",
           calories: 159,
@@ -188,19 +204,19 @@ export default {
     },
 
     editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.clientes.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
 
     deleteItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.clientes.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialogDelete = true;
     },
 
     deleteItemConfirm() {
-      this.desserts.splice(this.editedIndex, 1);
+      this.clientes.splice(this.editedIndex, 1);
       this.closeDelete();
     },
 
@@ -222,9 +238,9 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
+        Object.assign(this.clientes[this.editedIndex], this.editedItem);
       } else {
-        this.desserts.push(this.editedItem);
+        this.clientes.push(this.editedItem);
       }
       this.close();
     }

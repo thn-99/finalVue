@@ -21,6 +21,9 @@ export default {
   name: "App",
 
   components: {},
+  created:function(){
+    this.$store.commit('recargar');
+  },
 
   data: () => ({
     //
