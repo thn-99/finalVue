@@ -11,89 +11,29 @@
         hide-details
       ></v-text-field>
     </v-card-title>
-    <v-data-table :headers="headers" :items="clientes" :search="search">
+    <v-data-table
+      :headers="headers"
+      :items="clientes"
+      :search="search"
+      :loading="cargando"
+    >
       <template v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title>My CRUD</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
-          <v-dialog v-model="dialog" max-width="500px">
+          <v-dialog
+            v-model="dialog"
+            max-width="500px"
+            hide-overlay
+            transition="dialog-bottom-transition"
+          >
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
                 Añadir Cliente
               </v-btn>
             </template>
-            <v-card>
-              <v-card-title>
-                <span class="headline">{{ formTitle }}</span>
-              </v-card-title>
-
-              <v-card-text>
-                <v-container>
-                  <v-row>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.NIF"
-                        label="NIF"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.telefono"
-                        label="Teléfono"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.correo"
-                        label="Correo"
-                      ></v-text-field>
-                    </v-col>
-
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.direccion"
-                        label="direccion"
-                      ></v-text-field>
-                    </v-col>
-
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.codigoPostal"
-                        label="Código Postal"
-                      ></v-text-field>
-                    </v-col>
-
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.provincia"
-                        label="provincia"
-                      ></v-text-field>
-                    </v-col>
-
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.poblacion"
-                        label="poblacion"
-                      ></v-text-field>
-                    </v-col>
-                    
-
-
-                  </v-row>
-                </v-container>
-              </v-card-text>
-
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="close">
-                  Cancelar
-                </v-btn>
-                <v-btn color="blue darken-1" text @click="save">
-                  Añadir
-                </v-btn>
-              </v-card-actions>
-            </v-card>
+            <add-client-form />
           </v-dialog>
           <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
@@ -115,7 +55,7 @@
         </v-toolbar>
       </template>
       <template v-slot:item.actions="{ item }">
-        <v-icon small class="mr-2" @click="editItem(item)">
+        <v-icon large class="mr-2" @click="editItem(item)">
           mdi-eye
         </v-icon>
 
@@ -137,9 +77,15 @@
 </template>
 
 <script>
+import AddClientForm from "./AddClientForm.vue";
+import axios from "axios";
 export default {
+  components: {
+    AddClientForm
+  },
   data: () => ({
     search: "",
+    cargando: true,
     dialog: false,
     dialogDelete: false,
     headers: [
@@ -157,12 +103,8 @@ export default {
     ],
     clientes: [],
     editedIndex: -1,
-    editedItem: {
-
-    },
-    defaultItem: {
-
-    }
+    editedItem: {},
+    defaultItem: {}
   }),
 
   computed: {
@@ -179,16 +121,14 @@ export default {
       val || this.closeDelete();
     }
   },
-
-  created() {
-    //this.initialize();
-    this.$store.commit("recargar");
-    this.clientes=this.$store.state.clientes;
-    console.log(this.$store.state.clientes);
-
-    
+  async created() {
+    let response = await axios.post(
+      "http://facturas-api.daw.thnahmd.es/clientes"
+    );
+    console.log(response);
+    this.clientes = response.data;
+    this.cargando = false;
   },
-
   methods: {
     initialize() {
       this.clientes = [
@@ -198,8 +138,7 @@ export default {
           fat: 6.0,
           carbs: 24,
           protein: 4.0
-        },
-        
+        }
       ];
     },
 

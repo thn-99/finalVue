@@ -1,13 +1,17 @@
+<style>
+#padre {
+  background-color: #302f4d;
+}
+</style>
 <template>
-  <v-app>
-    <v-app-bar app color="blue-grey darken-3" light>
+  <v-app id="padre">
+    <v-app-bar app color="#120D31" light>
       <router-link to="/"
         ><v-btn plain color="primary">{{ pageTitle }}</v-btn></router-link
       >
       <v-btn to="/about" plain color="accent">About</v-btn>
       <v-btn to="/Client" plain color="accent">Cliente</v-btn>
       <v-btn to="/pruebas" plain color="accent">Cliente</v-btn>
-
     </v-app-bar>
 
     <v-main>
@@ -21,9 +25,7 @@ export default {
   name: "App",
 
   components: {},
-  created:function(){
-    this.$store.commit('recargar');
-  },
+  created: function() {},
 
   data: () => ({
     //

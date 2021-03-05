@@ -32,7 +32,6 @@ const routes = [
     name: "Pruebas",
     component: CheckAx
   }
-  
 ];
 
 const router = new VueRouter({

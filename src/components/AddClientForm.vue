@@ -1,77 +1,91 @@
+<style>
+#addUser {
+  background-color: #dfd8c7;
+}
+</style>
 <template>
-  <form>
-    <v-text-field
-      v-model="nif"
-      :error-messages="nifErrors"
-      :counter="10"
-      label="NIF"
-      required
-      @input="$v.nif.$touch()"
-      @blur="$v.nif.$touch()"
-    ></v-text-field>
+  <v-card id="addUser">
+    <v-card-title>
+      <span class="headline">Añadir Usuario</span>
+    </v-card-title>
+    <v-card-text>
+      <v-container>
+        <v-row>
+          <v-text-field
+            v-model="nif"
+            :error-messages="nifErrors"
+            :counter="10"
+            label="NIF"
+            required
+            @input="$v.nif.$touch()"
+            @blur="$v.nif.$touch()"
+          ></v-text-field>
+        </v-row>
 
-    <v-text-field
-      v-model="razonSocial"
-      :error-messages="razonSocialErrors"
-      :counter="90"
-      label="Razón Social"
-      required
-      @input="$v.razonSocial.$touch()"
-      @blur="$v.razonSocial.$touch()"
-    ></v-text-field>
+        <v-text-field
+          v-model="razonSocial"
+          :error-messages="razonSocialErrors"
+          :counter="90"
+          label="Razón Social"
+          required
+          @input="$v.razonSocial.$touch()"
+          @blur="$v.razonSocial.$touch()"
+        ></v-text-field>
 
-    <v-text-field
-      v-model="direction"
-      :error-messages="directionErrors"
-      :counter="90"
-      label="Direccion"
-      required
-      @input="$v.direction.$touch()"
-      @blur="$v.direction.$touch()"
-    ></v-text-field>
+        <v-text-field
+          v-model="direction"
+          :error-messages="directionErrors"
+          :counter="90"
+          label="Direccion"
+          required
+          @input="$v.direction.$touch()"
+          @blur="$v.direction.$touch()"
+        ></v-text-field>
 
-    <v-text-field
-      v-model="postalCode"
-      :error-messages="postalCodeErrors"
-      :counter="10"
-      label="CP"
-      required
-      @input="$v.postalCode.$touch()"
-      @blur="$v.postalCode.$touch()"
-    ></v-text-field>
+        <v-text-field
+          v-model="postalCode"
+          :error-messages="postalCodeErrors"
+          :counter="10"
+          label="CP"
+          required
+          @input="$v.postalCode.$touch()"
+          @blur="$v.postalCode.$touch()"
+        ></v-text-field>
 
-    <v-text-field
-      v-model="province"
-      :error-messages="provinceErrors"
-      :counter="10"
-      label="Provincia"
-      required
-      @input="$v.province.$touch()"
-      @blur="$v.province.$touch()"
-    ></v-text-field>
+        <v-text-field
+          v-model="province"
+          :error-messages="provinceErrors"
+          :counter="10"
+          label="Provincia"
+          required
+          @input="$v.province.$touch()"
+          @blur="$v.province.$touch()"
+        ></v-text-field>
 
-    <v-text-field
-      v-model="email"
-      :error-messages="emailErrors"
-      label="Correo"
-      required
-      @input="$v.email.$touch()"
-      @blur="$v.email.$touch()"
-    ></v-text-field>
+        <v-text-field
+          v-model="email"
+          :error-messages="emailErrors"
+          label="Correo"
+          required
+          @input="$v.email.$touch()"
+          @blur="$v.email.$touch()"
+        ></v-text-field>
 
-    <v-text-field
-      v-model="phoneNumber"
-      :error-messages="phoneNumberErrors"
-      :counter="10"
-      label="Telefono Móvil"
-      required
-      @input="$v.phoneNumber.$touch()"
-      @blur="$v.phoneNumber.$touch()"
-    ></v-text-field>
+        <v-text-field
+          v-model="phoneNumber"
+          :error-messages="phoneNumberErrors"
+          :counter="10"
+          label="Telefono Móvil"
+          required
+          @input="$v.phoneNumber.$touch()"
+          @blur="$v.phoneNumber.$touch()"
+        ></v-text-field>
 
-    <v-btn class="mr-4" color="green" @click="submit">Añadir</v-btn>
-    <v-btn @click="clear">Limpiar</v-btn>
-  </form>
+        <v-btn class="mr-4" color="green" @click="submit">Añadir</v-btn>
+        <v-btn @click="clear">Limpiar</v-btn>
+      </v-container>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
